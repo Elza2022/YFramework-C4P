@@ -1,0 +1,51 @@
+package crudRest;
+
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
+import static io.restassured.RestAssured.get;
+
+
+public class getUserList {
+	
+	public static void main(String[] args) {
+	
+	String url= "https://gorest.co.in/public/v2/users";
+	
+	
+	Response resp = given().param("gender", "female").
+			                param("status", "active").
+			                header("Authorization", "Bearer 0c9d4d9a41eb7b0e9512b11b67ceff7a0f3d2d174d0e8462c90a57fc151c81de").
+			                when().get(url);
+	
+	
+	String strResp=resp.asPrettyString();
+	System.out.println(strResp);
+	
+	
+	
+	resp.then().statusCode(200);
+	
+	System.out.println("----------------------");
+	
+	int statusCode = resp.getStatusCode();
+	System.out.println("Status code: " + statusCode);
+	
+	String conType = resp.getContentType();
+	System.out.println("Content type: " + conType);
+	
+	resp.then().contentType("");
+	
+	
+	System.out.println("----------------------");
+	
+}     
+
+
+}
+
+
+
+
